@@ -26,13 +26,13 @@ const About = () => {
             </h2>
             
             <p className="text-muted-foreground leading-relaxed mb-6">
-              Founded by <strong className="text-foreground">Fayaz H</strong>, Chai India brings the authentic taste of 
+              Founded by <strong className="text-foreground">Fayaz H</strong> and <strong className="text-foreground">Jaffer Sharif</strong>, Chai India brings the authentic taste of 
               traditional Indian chai to the heart of JP Nagar, Bangalore. Our passion lies in crafting 
               the perfect cup of chai using time-honored recipes and the finest ingredients.
             </p>
             
             <p className="text-muted-foreground leading-relaxed mb-8">
-              With two thriving branches managed by our dedicated team leaders Jaffer Sharif and 
+              With two thriving branches managed by our dedicated team leaders Sushil Kumar and 
               Mukesh Kumar, we take pride in serving happiness in every cup to our beloved customers.
             </p>
 
