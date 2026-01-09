@@ -3,7 +3,7 @@ import { MapPin, User, Phone, Clock } from "lucide-react";
 const branches = [
   {
     name: "Branch 1 - JP Nagar 3rd Phase",
-    manager: "Jaffer Sharif",
+    manager: "Sushil Kumar",
     address: "JP Nagar 3rd Phase, Bangalore, Karnataka",
     timing: "6:00 AM - 10:00 PM",
   },
