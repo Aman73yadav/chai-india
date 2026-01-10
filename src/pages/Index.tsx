@@ -9,13 +9,14 @@ import About from "@/components/About";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BackToTopButton from "@/components/BackToTopButton";
+import OrderBanner from "@/components/OrderBanner";
 import { useCart } from "@/hooks/useCart";
 
 const Index = () => {
   const { items, addItem, updateQuantity, removeItem, clearCart } = useCart();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-20">
       <Header 
         cartItems={items}
         onUpdateQuantity={updateQuantity}
@@ -30,6 +31,7 @@ const Index = () => {
       <Branches />
       <About />
       <Footer />
+      <OrderBanner items={items} onClearCart={clearCart} />
       <WhatsAppButton />
       <BackToTopButton />
     </div>
