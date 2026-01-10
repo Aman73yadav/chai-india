@@ -47,8 +47,8 @@ const Footer = () => {
           {/* Hours */}
           <div>
             <h4 className="font-heading text-lg font-bold text-foreground mb-4">Opening Hours</h4>
-            <p className="text-sm text-muted-foreground mb-2">Monday - Sunday</p>
-            <p className="text-lg font-semibold text-primary">6:00 AM - 10:00 PM</p>
+            <p className="text-sm text-muted-foreground mb-2">Monday - Saturday</p>
+            <p className="text-lg font-semibold text-primary">7:00 AM - 9:30 PM</p>
           </div>
         </div>
       </div>
