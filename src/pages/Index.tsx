@@ -8,13 +8,22 @@ import Branches from "@/components/Branches";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import BackToTopButton from "@/components/BackToTopButton";
+import { useCart } from "@/hooks/useCart";
 
 const Index = () => {
+  const { items, addItem, updateQuantity, removeItem, clearCart } = useCart();
+
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header 
+        cartItems={items}
+        onUpdateQuantity={updateQuantity}
+        onRemoveItem={removeItem}
+        onClearCart={clearCart}
+      />
       <Hero />
-      <Menu />
+      <Menu onAddToCart={addItem} />
       <SpecialOffers />
       <Gallery />
       <Reviews />
@@ -22,6 +31,7 @@ const Index = () => {
       <About />
       <Footer />
       <WhatsAppButton />
+      <BackToTopButton />
     </div>
   );
 };

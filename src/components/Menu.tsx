@@ -1,4 +1,5 @@
-import { Coffee } from "lucide-react";
+import { Coffee, Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const menuItems = {
   tea: [
@@ -25,17 +26,38 @@ const menuItems = {
   ],
 };
 
-const MenuItem = ({ name, price }: { name: string; price: number }) => (
+interface MenuItemProps {
+  name: string;
+  price: number;
+  category: string;
+  onAddToCart: (name: string, price: number, category: string) => void;
+}
+
+const MenuItem = ({ name, price, category, onAddToCart }: MenuItemProps) => (
   <div className="flex items-center justify-between py-4 border-b border-border/50 group hover:border-primary/50 transition-colors">
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3 flex-1">
       <Coffee className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
       <span className="font-body text-foreground group-hover:text-primary transition-colors">{name}</span>
     </div>
-    <span className="font-heading text-xl text-primary font-semibold">₹{price}</span>
+    <div className="flex items-center gap-3">
+      <span className="font-heading text-xl text-primary font-semibold">₹{price}</span>
+      <Button
+        variant="outline"
+        size="icon"
+        className="h-8 w-8 border-primary/50 hover:bg-primary hover:text-primary-foreground"
+        onClick={() => onAddToCart(name, price, category)}
+      >
+        <Plus className="h-4 w-4" />
+      </Button>
+    </div>
   </div>
 );
 
-const Menu = () => {
+interface MenuProps {
+  onAddToCart: (name: string, price: number, category: string) => void;
+}
+
+const Menu = ({ onAddToCart }: MenuProps) => {
   return (
     <section id="menu" className="py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
@@ -43,6 +65,7 @@ const Menu = () => {
           <span className="text-primary font-body text-sm tracking-[0.2em] uppercase">Our Offerings</span>
           <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mt-2">Menu</h2>
           <div className="w-24 h-1 bg-gradient-chai mx-auto mt-4 rounded-full" />
+          <p className="text-muted-foreground mt-4 text-sm">Click + to add items to your order</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -56,7 +79,7 @@ const Menu = () => {
             </h3>
             <div className="space-y-1">
               {menuItems.tea.map((item) => (
-                <MenuItem key={item.name} {...item} />
+                <MenuItem key={item.name} {...item} category="Tea" onAddToCart={onAddToCart} />
               ))}
             </div>
           </div>
@@ -71,7 +94,7 @@ const Menu = () => {
             </h3>
             <div className="space-y-1">
               {menuItems.beverages.map((item) => (
-                <MenuItem key={item.name} {...item} />
+                <MenuItem key={item.name} {...item} category="Beverages" onAddToCart={onAddToCart} />
               ))}
             </div>
           </div>
@@ -86,7 +109,7 @@ const Menu = () => {
             </h3>
             <div className="space-y-1">
               {menuItems.snacks.map((item) => (
-                <MenuItem key={item.name} {...item} />
+                <MenuItem key={item.name} {...item} category="Snacks" onAddToCart={onAddToCart} />
               ))}
             </div>
           </div>

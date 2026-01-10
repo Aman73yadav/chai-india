@@ -5,13 +5,13 @@ const branches = [
     name: "Branch 1 - JP Nagar 3rd Phase",
     manager: "Sushil Kumar",
     address: "JP Nagar 3rd Phase, Bangalore, Karnataka",
-    timing: "6:00 AM - 10:00 PM",
+    timing: "7:00 AM - 9:30 PM (Mon-Sat)",
   },
   {
     name: "Branch 2 - JP Nagar 3rd Phase",
     manager: "Mukesh Kumar",
     address: "JP Nagar 3rd Phase, Bangalore, Karnataka",
-    timing: "6:00 AM - 10:00 PM",
+    timing: "7:00 AM - 9:30 PM (Mon-Sat)",
   },
 ];
 
