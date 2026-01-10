@@ -25,7 +25,7 @@ const Branches = () => {
           <div className="w-24 h-1 bg-gradient-chai mx-auto mt-4 rounded-full" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
           {branches.map((branch, index) => (
             <div 
               key={index} 
@@ -57,6 +57,26 @@ const Branches = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Google Maps Embed */}
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-card rounded-xl p-4 shadow-card border border-border overflow-hidden">
+            <h3 className="font-heading text-xl font-bold text-foreground mb-4 text-center">Find Us on Map</h3>
+            <div className="rounded-lg overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.9076744755814!2d77.58276731482162!3d12.906573890893035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae150b1e3f8375%3A0x8e95bf8f6f2b2b2b!2sJP%20Nagar%203rd%20Phase%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1698123456789!5m2!1sen!2sin"
+                width="100%"
+                height="350"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Chai India Location - JP Nagar 3rd Phase"
+                className="rounded-lg"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

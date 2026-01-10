@@ -31,7 +31,15 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3 text-muted-foreground">
                 <Phone className="w-4 h-4 text-primary" />
-                <span className="text-sm">Contact Owner: Fayaz H</span>
+                <a href="tel:+918310698938" className="text-sm hover:text-primary transition-colors">
+                  <strong>Fayaz H:</strong> 8310698938
+                </a>
+              </div>
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <Phone className="w-4 h-4 text-primary" />
+                <a href="tel:+917892538527" className="text-sm hover:text-primary transition-colors">
+                  <strong>Jaffer Sharif:</strong> 7892538527
+                </a>
               </div>
             </div>
           </div>

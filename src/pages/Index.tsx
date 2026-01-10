@@ -7,6 +7,7 @@ import Reviews from "@/components/Reviews";
 import Branches from "@/components/Branches";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Index = () => {
   return (
@@ -20,6 +21,7 @@ const Index = () => {
       <Branches />
       <About />
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };
