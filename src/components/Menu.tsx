@@ -19,6 +19,10 @@ const menuItems = {
     { name: "Boost", price: 17 },
     { name: "Badam Milk", price: 17 },
   ],
+  snacks: [
+    { name: "Samosa", price: 15 },
+    { name: "Banana Cake", price: 15 },
+  ],
 };
 
 const MenuItem = ({ name, price }: { name: string; price: number }) => (
@@ -41,7 +45,7 @@ const Menu = () => {
           <div className="w-24 h-1 bg-gradient-chai mx-auto mt-4 rounded-full" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Tea Section */}
           <div className="bg-card rounded-xl p-8 shadow-card">
             <h3 className="font-heading text-2xl font-bold text-primary mb-6 flex items-center gap-3">
@@ -67,6 +71,21 @@ const Menu = () => {
             </h3>
             <div className="space-y-1">
               {menuItems.beverages.map((item) => (
+                <MenuItem key={item.name} {...item} />
+              ))}
+            </div>
+          </div>
+
+          {/* Snacks Section */}
+          <div className="bg-card rounded-xl p-8 shadow-card">
+            <h3 className="font-heading text-2xl font-bold text-primary mb-6 flex items-center gap-3">
+              <span className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                <Coffee className="w-5 h-5 text-primary" />
+              </span>
+              Snacks
+            </h3>
+            <div className="space-y-1">
+              {menuItems.snacks.map((item) => (
                 <MenuItem key={item.name} {...item} />
               ))}
             </div>
