@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BackToTopButton from "@/components/BackToTopButton";
 import OrderBanner from "@/components/OrderBanner";
+import AIChatBot from "@/components/AIChatBot";
 import { useCart } from "@/hooks/useCart";
 
 const Index = () => {
@@ -32,6 +33,7 @@ const Index = () => {
       <About />
       <Footer />
       <OrderBanner items={items} onClearCart={clearCart} />
+      <AIChatBot />
       <WhatsAppButton />
       <BackToTopButton />
     </div>
