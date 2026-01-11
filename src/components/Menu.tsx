@@ -1,5 +1,6 @@
 import { Coffee, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const menuItems = {
   tea: [
@@ -33,25 +34,35 @@ interface MenuItemProps {
   onAddToCart: (name: string, price: number, category: string) => void;
 }
 
-const MenuItem = ({ name, price, category, onAddToCart }: MenuItemProps) => (
-  <div className="flex items-center justify-between py-4 border-b border-border/50 group hover:border-primary/50 transition-colors">
-    <div className="flex items-center gap-3 flex-1">
-      <Coffee className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-      <span className="font-body text-foreground group-hover:text-primary transition-colors">{name}</span>
+const MenuItem = ({ name, price, category, onAddToCart }: MenuItemProps) => {
+  const handleAddToCart = () => {
+    onAddToCart(name, price, category);
+    toast.success(`${name} added to cart!`, {
+      description: `₹${price} • ${category}`,
+      duration: 2000,
+    });
+  };
+
+  return (
+    <div className="flex items-center justify-between py-4 border-b border-border/50 group hover:border-primary/50 transition-colors">
+      <div className="flex items-center gap-3 flex-1">
+        <Coffee className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+        <span className="font-body text-foreground group-hover:text-primary transition-colors">{name}</span>
+      </div>
+      <div className="flex items-center gap-3">
+        <span className="font-heading text-xl text-primary font-semibold">₹{price}</span>
+        <Button
+          variant="outline"
+          size="icon"
+          className="h-8 w-8 border-primary/50 hover:bg-primary hover:text-primary-foreground"
+          onClick={handleAddToCart}
+        >
+          <Plus className="h-4 w-4" />
+        </Button>
+      </div>
     </div>
-    <div className="flex items-center gap-3">
-      <span className="font-heading text-xl text-primary font-semibold">₹{price}</span>
-      <Button
-        variant="outline"
-        size="icon"
-        className="h-8 w-8 border-primary/50 hover:bg-primary hover:text-primary-foreground"
-        onClick={() => onAddToCart(name, price, category)}
-      >
-        <Plus className="h-4 w-4" />
-      </Button>
-    </div>
-  </div>
-);
+  );
+};
 
 interface MenuProps {
   onAddToCart: (name: string, price: number, category: string) => void;
