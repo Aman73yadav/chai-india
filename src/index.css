@@ -6,6 +6,50 @@
 
 @layer base {
   :root {
+    --background: 40 30% 96%;
+    --foreground: 20 20% 15%;
+
+    --card: 40 25% 98%;
+    --card-foreground: 20 20% 15%;
+
+    --popover: 40 25% 98%;
+    --popover-foreground: 20 20% 15%;
+
+    --primary: 32 85% 45%;
+    --primary-foreground: 40 30% 98%;
+
+    --secondary: 35 25% 90%;
+    --secondary-foreground: 20 20% 15%;
+
+    --muted: 35 20% 88%;
+    --muted-foreground: 20 15% 45%;
+
+    --accent: 32 70% 40%;
+    --accent-foreground: 40 30% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 35 20% 85%;
+    --input: 35 20% 85%;
+    --ring: 32 85% 45%;
+
+    --radius: 0.75rem;
+
+    --chai-orange: 32 85% 45%;
+    --chai-amber: 38 90% 50%;
+    --chai-brown: 20 40% 20%;
+    --chai-cream: 40 30% 92%;
+    --chai-dark: 20 10% 8%;
+    --spice-cinnamon: 15 60% 35%;
+
+    --gradient-chai: linear-gradient(135deg, hsl(32 85% 45%), hsl(38 90% 50%));
+    --gradient-warm: linear-gradient(180deg, hsl(40 30% 96%) 0%, hsl(35 25% 92%) 100%);
+    --shadow-warm: 0 10px 40px -10px hsl(32 85% 45% / 0.2);
+    --shadow-card: 0 4px 20px -5px hsl(0 0% 0% / 0.1);
+  }
+
+  .dark {
     --background: 20 10% 8%;
     --foreground: 40 30% 92%;
 
@@ -34,8 +78,6 @@
     --input: 25 20% 20%;
     --ring: 32 85% 55%;
 
-    --radius: 0.75rem;
-
     --chai-orange: 32 85% 55%;
     --chai-amber: 38 90% 50%;
     --chai-brown: 20 40% 20%;
@@ -47,11 +89,6 @@
     --gradient-warm: linear-gradient(180deg, hsl(20 10% 8%) 0%, hsl(20 15% 12%) 100%);
     --shadow-warm: 0 10px 40px -10px hsl(32 85% 55% / 0.3);
     --shadow-card: 0 4px 20px -5px hsl(0 0% 0% / 0.5);
-  }
-
-  .dark {
-    --background: 20 10% 8%;
-    --foreground: 40 30% 92%;
   }
 }
 
