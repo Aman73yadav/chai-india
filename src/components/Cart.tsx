@@ -8,6 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useOrders, openWhatsAppOrder } from "@/hooks/useOrders";
 
 export interface CartItem {
   id: string;
@@ -26,28 +27,24 @@ interface CartProps {
 
 const Cart = ({ items, onUpdateQuantity, onRemoveItem, onClearCart }: CartProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOrdering, setIsOrdering] = useState(false);
+  const { saveOrder } = useOrders();
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  const handleWhatsAppOrder = () => {
-    const phoneNumber = "918310698938";
-    let message = "🍵 *New Order from Chai India Website*\n\n";
-    message += "*Order Details:*\n";
-    message += "─────────────────\n";
+  const handleWhatsAppOrder = async () => {
+    setIsOrdering(true);
     
-    items.forEach((item) => {
-      message += `• ${item.name} × ${item.quantity} = ₹${item.price * item.quantity}\n`;
-    });
+    // Save order to database (if user is logged in)
+    await saveOrder({ items, totalAmount: totalPrice });
     
-    message += "─────────────────\n";
-    message += `*Total: ₹${totalPrice}*\n\n`;
-    message += "Please confirm my order. Thank you! 🙏";
+    // Open WhatsApp
+    openWhatsAppOrder(items, totalPrice);
     
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank");
     onClearCart();
     setIsOpen(false);
+    setIsOrdering(false);
   };
 
   return (
@@ -132,11 +129,12 @@ const Cart = ({ items, onUpdateQuantity, onRemoveItem, onClearCart }: CartProps)
                 </div>
                 <Button
                   onClick={handleWhatsAppOrder}
+                  disabled={isOrdering}
                   className="w-full bg-[#25D366] hover:bg-[#20BA5C] text-white gap-2"
                   size="lg"
                 >
                   <MessageCircle className="w-5 h-5" />
-                  Order via WhatsApp
+                  {isOrdering ? "Placing Order..." : "Order via WhatsApp"}
                 </Button>
                 <Button
                   variant="outline"
