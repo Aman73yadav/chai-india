@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { User, LogIn, LogOut, UserPlus, X, Mail, Lock, Phone, MapPin } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { User, LogIn, LogOut, UserPlus, X, Mail, Lock, Phone, MapPin, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,6 +16,7 @@ import { toast } from "sonner";
 import { useAuth, Profile } from "@/hooks/useAuth";
 
 const AuthModal = () => {
+  const navigate = useNavigate();
   const { user, profile, loading, signUp, signIn, signOut, updateProfile } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -202,14 +204,27 @@ const AuthModal = () => {
               </Button>
             </form>
 
-            <Button
-              variant="outline"
-              onClick={handleSignOut}
-              className="w-full gap-2"
-            >
-              <LogOut className="w-4 h-4" />
-              Sign Out
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setIsOpen(false);
+                  navigate("/my-orders");
+                }}
+                className="flex-1 gap-2"
+              >
+                <ShoppingBag className="w-4 h-4" />
+                My Orders
+              </Button>
+              <Button
+                variant="outline"
+                onClick={handleSignOut}
+                className="flex-1 gap-2"
+              >
+                <LogOut className="w-4 h-4" />
+                Sign Out
+              </Button>
+            </div>
           </div>
         ) : (
           // Not logged in - Show auth forms
