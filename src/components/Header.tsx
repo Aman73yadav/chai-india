@@ -3,6 +3,7 @@ import { Coffee, MapPin, Menu as MenuIcon } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Cart, { CartItem } from "@/components/Cart";
 import ThemeToggle from "@/components/ThemeToggle";
+import AuthModal from "@/components/AuthModal";
 
 const navLinks = [
   { href: "#menu", label: "Menu" },
@@ -54,8 +55,9 @@ const Header = ({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart }: Head
         </nav>
 
         {/* Desktop Actions */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
+          <AuthModal />
           <Cart
             items={cartItems}
             onUpdateQuantity={onUpdateQuantity}
@@ -71,6 +73,7 @@ const Header = ({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart }: Head
         {/* Mobile Actions */}
         <div className="flex md:hidden items-center gap-2">
           <ThemeToggle />
+          <AuthModal />
           <Cart
             items={cartItems}
             onUpdateQuantity={onUpdateQuantity}
