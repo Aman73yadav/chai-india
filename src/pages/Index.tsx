@@ -4,6 +4,7 @@ import Menu from "@/components/Menu";
 import SpecialOffers from "@/components/SpecialOffers";
 import Gallery from "@/components/Gallery";
 import Reviews from "@/components/Reviews";
+import SuccessStories from "@/components/SuccessStories";
 import Branches from "@/components/Branches";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
@@ -29,6 +30,7 @@ const Index = () => {
       <SpecialOffers />
       <Gallery />
       <Reviews />
+      <SuccessStories />
       <Branches />
       <About />
       <Footer />
