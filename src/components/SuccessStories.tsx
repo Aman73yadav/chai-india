@@ -1,4 +1,5 @@
 import { Star, Trophy, TrendingUp, Users } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import fayazImage from "@/assets/fayaz-h.jpg";
 
 const successStories = [
@@ -17,26 +18,100 @@ const successStories = [
   }
 ];
 
+const useIntersectionObserver = (threshold = 0.2) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return { ref, isVisible };
+};
+
+const AnimatedCounter = ({ value, isVisible }: { value: number; isVisible: boolean }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const duration = 1500;
+    const steps = 30;
+    const increment = value / steps;
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= value) {
+        setCount(value);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(current));
+      }
+    }, duration / steps);
+
+    return () => clearInterval(timer);
+  }, [value, isVisible]);
+
+  return <>{count}</>;
+};
+
 const SuccessStories = () => {
+  const { ref: sectionRef, isVisible: sectionVisible } = useIntersectionObserver();
+  const { ref: cardRef, isVisible: cardVisible } = useIntersectionObserver(0.3);
+
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-background overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div 
+          ref={sectionRef}
+          className={`text-center mb-16 transition-all duration-700 ${
+            sectionVisible 
+              ? "opacity-100 translate-y-0" 
+              : "opacity-0 translate-y-10"
+          }`}
+        >
           <span className="text-primary font-body text-sm tracking-[0.2em] uppercase">Our Journey</span>
           <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mt-2">Success Stories</h2>
-          <div className="w-24 h-1 bg-gradient-chai mx-auto mt-4 rounded-full" />
+          <div className={`w-24 h-1 bg-gradient-chai mx-auto mt-4 rounded-full transition-all duration-700 delay-300 ${
+            sectionVisible ? "scale-x-100" : "scale-x-0"
+          }`} />
         </div>
 
         {successStories.map((story, index) => (
-          <div key={index} className="max-w-5xl mx-auto">
-            <div className="bg-card rounded-2xl overflow-hidden shadow-elegant border border-border">
+          <div 
+            key={index} 
+            ref={cardRef}
+            className={`max-w-5xl mx-auto transition-all duration-1000 ${
+              cardVisible 
+                ? "opacity-100 translate-y-0" 
+                : "opacity-0 translate-y-16"
+            }`}
+          >
+            <div className="bg-card rounded-2xl overflow-hidden shadow-elegant border border-border hover:shadow-2xl transition-shadow duration-500">
               <div className="grid md:grid-cols-2 gap-0">
                 {/* Image Section */}
-                <div className="relative h-80 md:h-auto">
+                <div className={`relative h-80 md:h-auto overflow-hidden transition-all duration-1000 delay-200 ${
+                  cardVisible ? "opacity-100 scale-100" : "opacity-0 scale-105"
+                }`}>
                   <img 
                     src={story.image} 
                     alt={story.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent md:bg-gradient-to-r" />
                   <div className="absolute bottom-4 left-4 md:hidden">
@@ -47,45 +122,61 @@ const SuccessStories = () => {
 
                 {/* Content Section */}
                 <div className="p-8 flex flex-col justify-center">
-                  <div className="hidden md:block mb-4">
+                  <div className={`hidden md:block mb-4 transition-all duration-700 delay-300 ${
+                    cardVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+                  }`}>
                     <h3 className="font-heading text-3xl font-bold text-foreground">{story.name}</h3>
                     <p className="text-primary font-medium">{story.role}</p>
                   </div>
 
-                  <p className="text-muted-foreground leading-relaxed mb-6">
+                  <p className={`text-muted-foreground leading-relaxed mb-6 transition-all duration-700 delay-400 ${
+                    cardVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+                  }`}>
                     {story.story}
                   </p>
 
-                  <div className="bg-primary/10 rounded-lg p-4 mb-6 border-l-4 border-primary">
+                  <div className={`bg-primary/10 rounded-lg p-4 mb-6 border-l-4 border-primary transition-all duration-700 delay-500 ${
+                    cardVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+                  }`}>
                     <p className="text-foreground italic font-medium">"{story.quote}"</p>
                   </div>
 
-                  <div className="flex items-center gap-2 text-sm text-primary font-medium mb-6">
-                    <Trophy className="w-5 h-5" />
+                  <div className={`flex items-center gap-2 text-sm text-primary font-medium mb-6 transition-all duration-700 delay-600 ${
+                    cardVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+                  }`}>
+                    <Trophy className="w-5 h-5 animate-pulse" />
                     <span>{story.achievement}</span>
                   </div>
 
                   {/* Stats */}
-                  <div className="grid grid-cols-3 gap-4 pt-6 border-t border-border">
-                    <div className="text-center">
+                  <div className={`grid grid-cols-3 gap-4 pt-6 border-t border-border transition-all duration-700 delay-700 ${
+                    cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                  }`}>
+                    <div className="text-center group">
                       <div className="flex items-center justify-center gap-1 text-primary mb-1">
-                        <TrendingUp className="w-4 h-4" />
+                        <TrendingUp className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
                       </div>
-                      <div className="font-heading text-2xl font-bold text-foreground">{story.stats.yearsInBusiness}+</div>
+                      <div className="font-heading text-2xl font-bold text-foreground">
+                        <AnimatedCounter value={story.stats.yearsInBusiness} isVisible={cardVisible} />+
+                      </div>
                       <p className="text-xs text-muted-foreground">Years</p>
                     </div>
-                    <div className="text-center">
+                    <div className="text-center group">
                       <div className="flex items-center justify-center gap-1 text-primary mb-1">
-                        <Users className="w-4 h-4" />
+                        <Users className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
                       </div>
-                      <div className="font-heading text-2xl font-bold text-foreground">{story.stats.dailyCustomers}+</div>
+                      <div className="font-heading text-2xl font-bold text-foreground">
+                        <AnimatedCounter value={story.stats.dailyCustomers} isVisible={cardVisible} />+
+                      </div>
                       <p className="text-xs text-muted-foreground">Daily Customers</p>
                     </div>
-                    <div className="text-center">
+                    <div className="text-center group">
                       <div className="flex items-center justify-center gap-1 text-primary mb-1">
-                        <Star className="w-4 h-4" />
+                        <Star className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
                       </div>
-                      <div className="font-heading text-2xl font-bold text-foreground">{story.stats.teamMembers}+</div>
+                      <div className="font-heading text-2xl font-bold text-foreground">
+                        <AnimatedCounter value={story.stats.teamMembers} isVisible={cardVisible} />+
+                      </div>
                       <p className="text-xs text-muted-foreground">Team Members</p>
                     </div>
                   </div>
