@@ -1,18 +1,26 @@
-import { Star, Trophy, TrendingUp, Users } from "lucide-react";
+import { Star, Trophy, TrendingUp, Users, Coffee, Heart, Award, MapPin } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import fayazImage from "@/assets/fayaz-h.jpg";
+
+const milestones = [
+  { icon: TrendingUp, text: "From a small street stall to 2 thriving branches" },
+  { icon: Heart, text: "Waking up at 4 AM daily to brew the perfect chai" },
+  { icon: Users, text: "Created 10+ local jobs, supporting neighborhood families" },
+  { icon: Award, text: "Developed 15+ signature chai blends loved by customers" },
+];
 
 const successStories = [
   {
     name: "Fayaz H",
-    role: "Founder & Owner",
+    role: "Founder & Owner, Chai India",
     image: fayazImage,
-    story: "Started Chai India with a simple dream - to bring authentic Indian chai to every corner of Bangalore. From a small stall to two thriving branches, the journey has been incredible. Every cup we serve carries the love and passion we have for chai.",
-    achievement: "Built from ground up to 500+ daily customers",
-    quote: "Chai is not just a drink, it's an emotion that brings people together.",
+    story: "What started as a humble chai stall in JP Nagar has grown into a beloved community landmark. Every morning at 4 AM, I begin my day preparing fresh spice blends, just like my father taught me. The journey wasn't easy – there were days of doubt, but seeing familiar faces return for their daily cup kept me going. Today, Chai India is more than a business; it's a gathering place where strangers become friends over a warm cup of chai.",
+    achievement: "Recognized as JP Nagar's favorite chai destination",
+    quote: "Every cup we serve carries generations of tradition and a dream to bring happiness to our community.",
     stats: {
-      yearsInBusiness: 2,
+      cupsDaily: 1000,
       dailyCustomers: 500,
+      menuItems: 25,
       teamMembers: 10,
     }
   }
@@ -149,35 +157,44 @@ const SuccessStories = () => {
                   </div>
 
                   {/* Stats */}
-                  <div className={`grid grid-cols-3 gap-4 pt-6 border-t border-border transition-all duration-700 delay-700 ${
+                  <div className={`grid grid-cols-4 gap-3 pt-6 border-t border-border transition-all duration-700 delay-700 ${
                     cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                   }`}>
                     <div className="text-center group">
                       <div className="flex items-center justify-center gap-1 text-primary mb-1">
-                        <TrendingUp className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
+                        <Coffee className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
                       </div>
-                      <div className="font-heading text-2xl font-bold text-foreground">
-                        <AnimatedCounter value={story.stats.yearsInBusiness} isVisible={cardVisible} />+
+                      <div className="font-heading text-xl md:text-2xl font-bold text-foreground">
+                        <AnimatedCounter value={story.stats.cupsDaily} isVisible={cardVisible} />+
                       </div>
-                      <p className="text-xs text-muted-foreground">Years</p>
+                      <p className="text-xs text-muted-foreground">Cups Daily</p>
                     </div>
                     <div className="text-center group">
                       <div className="flex items-center justify-center gap-1 text-primary mb-1">
                         <Users className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
                       </div>
-                      <div className="font-heading text-2xl font-bold text-foreground">
+                      <div className="font-heading text-xl md:text-2xl font-bold text-foreground">
                         <AnimatedCounter value={story.stats.dailyCustomers} isVisible={cardVisible} />+
                       </div>
-                      <p className="text-xs text-muted-foreground">Daily Customers</p>
+                      <p className="text-xs text-muted-foreground">Customers</p>
                     </div>
                     <div className="text-center group">
                       <div className="flex items-center justify-center gap-1 text-primary mb-1">
                         <Star className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
                       </div>
-                      <div className="font-heading text-2xl font-bold text-foreground">
+                      <div className="font-heading text-xl md:text-2xl font-bold text-foreground">
+                        <AnimatedCounter value={story.stats.menuItems} isVisible={cardVisible} />+
+                      </div>
+                      <p className="text-xs text-muted-foreground">Menu Items</p>
+                    </div>
+                    <div className="text-center group">
+                      <div className="flex items-center justify-center gap-1 text-primary mb-1">
+                        <Heart className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
+                      </div>
+                      <div className="font-heading text-xl md:text-2xl font-bold text-foreground">
                         <AnimatedCounter value={story.stats.teamMembers} isVisible={cardVisible} />+
                       </div>
-                      <p className="text-xs text-muted-foreground">Team Members</p>
+                      <p className="text-xs text-muted-foreground">Team</p>
                     </div>
                   </div>
                 </div>
@@ -185,6 +202,26 @@ const SuccessStories = () => {
             </div>
           </div>
         ))}
+
+        {/* Milestones Section */}
+        <div className={`max-w-4xl mx-auto mt-16 transition-all duration-1000 delay-500 ${
+          cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        }`}>
+          <h3 className="font-heading text-2xl font-bold text-foreground text-center mb-8">Key Milestones</h3>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {milestones.map((milestone, idx) => (
+              <div 
+                key={idx}
+                className="flex items-center gap-4 bg-card/50 rounded-xl p-4 border border-border hover:border-primary/30 transition-all duration-300 hover:scale-[1.02] group"
+              >
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                  <milestone.icon className="w-5 h-5 text-primary" />
+                </div>
+                <p className="text-foreground/90 text-sm">{milestone.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
