@@ -5,6 +5,7 @@ import SpecialOffers from "@/components/SpecialOffers";
 import Gallery from "@/components/Gallery";
 import Reviews from "@/components/Reviews";
 import SuccessStories from "@/components/SuccessStories";
+import MeetTheTeam from "@/components/MeetTheTeam";
 import Branches from "@/components/Branches";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
@@ -31,6 +32,7 @@ const Index = () => {
       <Gallery />
       <Reviews />
       <SuccessStories />
+      <MeetTheTeam />
       <Branches />
       <About />
       <Footer />
