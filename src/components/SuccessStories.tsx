@@ -1,6 +1,7 @@
-import { Star, Trophy, TrendingUp, Users, Coffee, Heart, Award, MapPin } from "lucide-react";
+import { Star, Trophy, TrendingUp, Users, Coffee, Heart, Award, Handshake } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import fayazImage from "@/assets/fayaz-h.jpg";
+import jafferImage from "@/assets/jaffer-sharif.jpg";
 
 const milestones = [
   { icon: TrendingUp, text: "From a small street stall to 2 thriving branches" },
@@ -22,6 +23,20 @@ const successStories = [
       dailyCustomers: 500,
       menuItems: 25,
       teamMembers: 10,
+    }
+  },
+  {
+    name: "Jaffer Sharif",
+    role: "Co-Founder, Chai India",
+    image: jafferImage,
+    story: "Partnering with Fayaz was the best decision I ever made. Together, we've built something truly special – a place where authentic chai meets modern hospitality. My focus has always been on creating an experience that goes beyond just serving chai. From curating the perfect ambiance to ensuring every customer feels at home, I believe in the power of details. Our vision is to make Chai India a household name across Bangalore.",
+    achievement: "Expanded operations to serve 500+ customers daily",
+    quote: "Success is not just about growth – it's about creating moments of joy for every person who walks through our doors.",
+    stats: {
+      yearsExperience: 3,
+      branchesManaged: 2,
+      customerSatisfaction: 98,
+      eventsHosted: 50,
     }
   }
 ];
@@ -160,42 +175,85 @@ const SuccessStories = () => {
                   <div className={`grid grid-cols-4 gap-3 pt-6 border-t border-border transition-all duration-700 delay-700 ${
                     cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                   }`}>
-                    <div className="text-center group">
-                      <div className="flex items-center justify-center gap-1 text-primary mb-1">
-                        <Coffee className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
-                      </div>
-                      <div className="font-heading text-xl md:text-2xl font-bold text-foreground">
-                        <AnimatedCounter value={story.stats.cupsDaily} isVisible={cardVisible} />+
-                      </div>
-                      <p className="text-xs text-muted-foreground">Cups Daily</p>
-                    </div>
-                    <div className="text-center group">
-                      <div className="flex items-center justify-center gap-1 text-primary mb-1">
-                        <Users className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
-                      </div>
-                      <div className="font-heading text-xl md:text-2xl font-bold text-foreground">
-                        <AnimatedCounter value={story.stats.dailyCustomers} isVisible={cardVisible} />+
-                      </div>
-                      <p className="text-xs text-muted-foreground">Customers</p>
-                    </div>
-                    <div className="text-center group">
-                      <div className="flex items-center justify-center gap-1 text-primary mb-1">
-                        <Star className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
-                      </div>
-                      <div className="font-heading text-xl md:text-2xl font-bold text-foreground">
-                        <AnimatedCounter value={story.stats.menuItems} isVisible={cardVisible} />+
-                      </div>
-                      <p className="text-xs text-muted-foreground">Menu Items</p>
-                    </div>
-                    <div className="text-center group">
-                      <div className="flex items-center justify-center gap-1 text-primary mb-1">
-                        <Heart className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
-                      </div>
-                      <div className="font-heading text-xl md:text-2xl font-bold text-foreground">
-                        <AnimatedCounter value={story.stats.teamMembers} isVisible={cardVisible} />+
-                      </div>
-                      <p className="text-xs text-muted-foreground">Team</p>
-                    </div>
+                    {index === 0 ? (
+                      <>
+                        <div className="text-center group">
+                          <div className="flex items-center justify-center gap-1 text-primary mb-1">
+                            <Coffee className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
+                          </div>
+                          <div className="font-heading text-xl md:text-2xl font-bold text-foreground">
+                            <AnimatedCounter value={story.stats.cupsDaily} isVisible={cardVisible} />+
+                          </div>
+                          <p className="text-xs text-muted-foreground">Cups Daily</p>
+                        </div>
+                        <div className="text-center group">
+                          <div className="flex items-center justify-center gap-1 text-primary mb-1">
+                            <Users className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
+                          </div>
+                          <div className="font-heading text-xl md:text-2xl font-bold text-foreground">
+                            <AnimatedCounter value={story.stats.dailyCustomers} isVisible={cardVisible} />+
+                          </div>
+                          <p className="text-xs text-muted-foreground">Customers</p>
+                        </div>
+                        <div className="text-center group">
+                          <div className="flex items-center justify-center gap-1 text-primary mb-1">
+                            <Star className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
+                          </div>
+                          <div className="font-heading text-xl md:text-2xl font-bold text-foreground">
+                            <AnimatedCounter value={story.stats.menuItems} isVisible={cardVisible} />+
+                          </div>
+                          <p className="text-xs text-muted-foreground">Menu Items</p>
+                        </div>
+                        <div className="text-center group">
+                          <div className="flex items-center justify-center gap-1 text-primary mb-1">
+                            <Heart className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
+                          </div>
+                          <div className="font-heading text-xl md:text-2xl font-bold text-foreground">
+                            <AnimatedCounter value={story.stats.teamMembers} isVisible={cardVisible} />+
+                          </div>
+                          <p className="text-xs text-muted-foreground">Team</p>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="text-center group">
+                          <div className="flex items-center justify-center gap-1 text-primary mb-1">
+                            <Award className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
+                          </div>
+                          <div className="font-heading text-xl md:text-2xl font-bold text-foreground">
+                            <AnimatedCounter value={story.stats.yearsExperience} isVisible={cardVisible} />+
+                          </div>
+                          <p className="text-xs text-muted-foreground">Years</p>
+                        </div>
+                        <div className="text-center group">
+                          <div className="flex items-center justify-center gap-1 text-primary mb-1">
+                            <Handshake className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
+                          </div>
+                          <div className="font-heading text-xl md:text-2xl font-bold text-foreground">
+                            <AnimatedCounter value={story.stats.branchesManaged} isVisible={cardVisible} />
+                          </div>
+                          <p className="text-xs text-muted-foreground">Branches</p>
+                        </div>
+                        <div className="text-center group">
+                          <div className="flex items-center justify-center gap-1 text-primary mb-1">
+                            <Star className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
+                          </div>
+                          <div className="font-heading text-xl md:text-2xl font-bold text-foreground">
+                            <AnimatedCounter value={story.stats.customerSatisfaction} isVisible={cardVisible} />%
+                          </div>
+                          <p className="text-xs text-muted-foreground">Satisfaction</p>
+                        </div>
+                        <div className="text-center group">
+                          <div className="flex items-center justify-center gap-1 text-primary mb-1">
+                            <Trophy className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
+                          </div>
+                          <div className="font-heading text-xl md:text-2xl font-bold text-foreground">
+                            <AnimatedCounter value={story.stats.eventsHosted} isVisible={cardVisible} />+
+                          </div>
+                          <p className="text-xs text-muted-foreground">Events</p>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
