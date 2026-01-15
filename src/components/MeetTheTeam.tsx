@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { MapPin, User } from "lucide-react";
+import { MapPin } from "lucide-react";
 import mukeshImage from "@/assets/mukesh-kumar.jpg";
+import sushilImage from "@/assets/sushil-kumar.jpg";
 
 const teamMembers = [
   {
     name: "Sushil Kumar",
     role: "Branch 1 Manager",
-    image: null, // Placeholder - photo to be added
+    image: sushilImage,
     branch: "JP Nagar 3rd Phase - Branch 1",
     description: "Dedicated to ensuring every customer leaves with a smile and the perfect cup of chai.",
   },
@@ -85,17 +86,11 @@ const MeetTheTeam = () => {
             >
               {/* Image Section */}
               <div className="relative h-64 overflow-hidden bg-muted">
-                {member.image ? (
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/10 to-primary/5">
-                    <User className="w-24 h-24 text-primary/30" />
-                  </div>
-                )}
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
               </div>
 
