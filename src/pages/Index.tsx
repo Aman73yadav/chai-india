@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Menu from "@/components/Menu";
 import SpecialOffers from "@/components/SpecialOffers";
+import BulkOrders from "@/components/BulkOrders";
 import Gallery from "@/components/Gallery";
 import Reviews from "@/components/Reviews";
 import SuccessStories from "@/components/SuccessStories";
@@ -29,6 +30,7 @@ const Index = () => {
       <Hero />
       <Menu onAddToCart={addItem} />
       <SpecialOffers />
+      <BulkOrders />
       <Gallery />
       <Reviews />
       <SuccessStories />
