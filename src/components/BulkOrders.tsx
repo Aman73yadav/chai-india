@@ -1,5 +1,6 @@
 import { Building2, PartyPopper, Sparkles, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import BulkOrderForm from "./BulkOrderForm";
 
 const orderTypes = [
   {
@@ -23,13 +24,6 @@ const orderTypes = [
 ];
 
 const BulkOrders = () => {
-  const handleEnquiry = () => {
-    const message = encodeURIComponent(
-      "Hi! I'm interested in bulk ordering for my event. Please share the details."
-    );
-    window.open(`https://wa.me/918310698938?text=${message}`, "_blank");
-  };
-
   return (
     <section className="py-16 bg-gradient-to-br from-primary/5 via-background to-secondary/10">
       <div className="container mx-auto px-4">
@@ -67,14 +61,17 @@ const BulkOrders = () => {
         </div>
 
         <div className="text-center">
-          <Button
-            onClick={handleEnquiry}
-            size="lg"
-            className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 gap-2"
-          >
-            <Phone className="w-5 h-5" />
-            Enquire Now on WhatsApp
-          </Button>
+          <BulkOrderForm
+            trigger={
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 gap-2"
+              >
+                <Phone className="w-5 h-5" />
+                Enquire Now
+              </Button>
+            }
+          />
           <p className="text-sm text-muted-foreground mt-4">
             Get special rates for bulk orders • Free delivery on large orders
           </p>
