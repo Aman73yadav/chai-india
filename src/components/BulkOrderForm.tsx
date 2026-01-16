@@ -7,6 +7,7 @@ import { CalendarIcon, Send, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Dialog,
   DialogContent,
@@ -93,32 +94,57 @@ const BulkOrderForm = ({ trigger }: BulkOrderFormProps) => {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
 
-    // Build WhatsApp message
-    const eventLabel = eventTypes.find((e) => e.value === data.eventType)?.label || data.eventType;
-    const message = [
-      `*Bulk Order Enquiry*`,
-      ``,
-      `*Name:* ${data.name}`,
-      `*Phone:* ${data.phone}`,
-      `*Event Type:* ${eventLabel}`,
-      `*Event Date:* ${format(data.eventDate, "PPP")}`,
-      `*Estimated Quantity:* ${data.quantity} cups`,
-      data.notes ? `*Additional Notes:* ${data.notes}` : "",
-    ]
-      .filter(Boolean)
-      .join("\n");
+    try {
+      // Save enquiry to database
+      const { error } = await supabase.from("bulk_order_enquiries").insert({
+        name: data.name,
+        phone: data.phone,
+        event_type: data.eventType,
+        event_date: format(data.eventDate, "yyyy-MM-dd"),
+        quantity: parseInt(data.quantity, 10),
+        notes: data.notes || null,
+      });
 
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/918310698938?text=${encodedMessage}`, "_blank");
+      if (error) {
+        console.error("Error saving enquiry:", error);
+        // Continue with WhatsApp even if DB save fails
+      }
 
-    toast({
-      title: "Enquiry Sent!",
-      description: "Your bulk order enquiry has been sent via WhatsApp.",
-    });
+      // Build WhatsApp message
+      const eventLabel = eventTypes.find((e) => e.value === data.eventType)?.label || data.eventType;
+      const message = [
+        `*Bulk Order Enquiry*`,
+        ``,
+        `*Name:* ${data.name}`,
+        `*Phone:* ${data.phone}`,
+        `*Event Type:* ${eventLabel}`,
+        `*Event Date:* ${format(data.eventDate, "PPP")}`,
+        `*Estimated Quantity:* ${data.quantity} cups`,
+        data.notes ? `*Additional Notes:* ${data.notes}` : "",
+      ]
+        .filter(Boolean)
+        .join("\n");
 
-    form.reset();
-    setOpen(false);
-    setIsSubmitting(false);
+      const encodedMessage = encodeURIComponent(message);
+      window.open(`https://wa.me/918310698938?text=${encodedMessage}`, "_blank");
+
+      toast({
+        title: "Enquiry Sent!",
+        description: "Your bulk order enquiry has been saved and sent via WhatsApp.",
+      });
+
+      form.reset();
+      setOpen(false);
+    } catch (err) {
+      console.error("Submission error:", err);
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      bulk_order_enquiries: {
+        Row: {
+          created_at: string
+          event_date: string
+          event_type: string
+          id: string
+          name: string
+          notes: string | null
+          phone: string
+          quantity: number
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          event_date: string
+          event_type: string
+          id?: string
+          name: string
+          notes?: string | null
+          phone: string
+          quantity: number
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          event_date?: string
+          event_type?: string
+          id?: string
+          name?: string
+          notes?: string | null
+          phone?: string
+          quantity?: number
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
           created_at: string
