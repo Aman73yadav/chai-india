@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { Coffee, MapPin, Menu as MenuIcon } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Coffee, MapPin, Menu as MenuIcon, Shield } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 import Cart, { CartItem } from "@/components/Cart";
 import ThemeToggle from "@/components/ThemeToggle";
 import AuthModal from "@/components/AuthModal";
+import { useAdminCheck } from "@/hooks/useAdminCheck";
 
 const navLinks = [
   { href: "#menu", label: "Menu" },
@@ -22,6 +25,7 @@ interface HeaderProps {
 
 const Header = ({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isAdmin } = useAdminCheck();
 
   const handleLinkClick = () => {
     setIsOpen(false);
@@ -56,6 +60,14 @@ const Header = ({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart }: Head
 
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center gap-3">
+          {isAdmin && (
+            <Button asChild variant="outline" size="sm" className="gap-1.5">
+              <Link to="/admin">
+                <Shield className="w-4 h-4" />
+                Admin
+              </Link>
+            </Button>
+          )}
           <ThemeToggle />
           <AuthModal />
           <Cart
@@ -106,6 +118,16 @@ const Header = ({ cartItems, onUpdateQuantity, onRemoveItem, onClearCart }: Head
                 {/* Mobile Navigation Links */}
                 <nav className="flex-1 p-6">
                   <div className="space-y-2">
+                    {isAdmin && (
+                      <Link
+                        to="/admin"
+                        onClick={handleLinkClick}
+                        className="flex items-center gap-3 px-4 py-3 rounded-lg text-primary bg-primary/10 font-medium"
+                      >
+                        <Shield className="w-4 h-4" />
+                        Admin Dashboard
+                      </Link>
+                    )}
                     {navLinks.map((link) => (
                       <a
                         key={link.href}
