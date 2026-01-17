@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MapPin, Instagram, Phone } from "lucide-react";
+import { MapPin, Instagram, Phone, Facebook } from "lucide-react";
 import mukeshImage from "@/assets/mukesh-kumar.jpg";
 import sushilImage from "@/assets/sushil-kumar.jpg";
 
@@ -12,7 +12,8 @@ const teamMembers = [
     description: "Dedicated to ensuring every customer leaves with a smile and the perfect cup of chai.",
     social: {
       instagram: "https://instagram.com/",
-      phone: "+91 9876543210",
+      facebook: "",
+      phone: "+91 6366004299",
     },
   },
   {
@@ -23,7 +24,8 @@ const teamMembers = [
     description: "Passionate about quality and service, leading our team to deliver exceptional chai experiences.",
     social: {
       instagram: "https://instagram.com/",
-      phone: "+91 9876543211",
+      facebook: "https://facebook.com/Mukish.Kinge",
+      phone: "+91 8867425397",
     },
   },
 ];
@@ -113,6 +115,17 @@ const MeetTheTeam = () => {
                   >
                     <Instagram className="w-5 h-5" />
                   </a>
+                  {member.social.facebook && (
+                    <a
+                      href={member.social.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-12 h-12 rounded-full bg-primary/90 backdrop-blur-sm flex items-center justify-center text-primary-foreground hover:bg-primary hover:scale-110 transition-all duration-300 shadow-lg"
+                      aria-label={`${member.name}'s Facebook`}
+                    >
+                      <Facebook className="w-5 h-5" />
+                    </a>
+                  )}
                   <a
                     href={`tel:${member.social.phone}`}
                     className="w-12 h-12 rounded-full bg-primary/90 backdrop-blur-sm flex items-center justify-center text-primary-foreground hover:bg-primary hover:scale-110 transition-all duration-300 shadow-lg"
